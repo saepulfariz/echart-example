@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>ECharts</title>
+  <!-- Include the ECharts file you just downloaded -->
+  <script src="dist/echarts.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"
+    integrity="sha512-k37wQcV4v2h6jgYf5IUz1MoSKPpDs630XGSmCaCCOXxy2awgAWKHGZWr9nMyGgk3IOxA1NxdkN8r1JHgkUtMoQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+</head>
+
+<body>
+  <!-- Prepare a DOM with a defined width and height for ECharts -->
+  <div id="main" style="width: 600px;height:400px;"></div>
+  <script type="text/javascript">
+    // Initialize the echarts instance based on the prepared dom
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // Specify the configuration items and data for the chart
+    var option = {
+      // Global palette:
+      color: [
+        '#c23531',
+        '#2f4554',
+        '#61a0a8',
+        '#d48265',
+        '#91c7ae',
+        '#749f83',
+        '#ca8622',
+        '#bda29a',
+        '#6e7074',
+        '#546570',
+        '#c4ccd3'
+      ],
+      title: {
+        text: 'ECharts Title'
+      },
+      toolbox: {
+        show: true,
+        feature: {
+          // saveAsImage: {}
+          saveAsImage: {
+            name: "hello"
+          },
+        }
+      },
+      tooltip: {},
+      legend: {
+        // Try 'horizontal'
+        orient: 'vertical',
+        // right: 10,
+        right: -5,
+        // top: 'bottom',
+        top: 'center',
+        data: ['2015', '2016', '2017']
+      },
+      xAxis: {
+        type: 'category',
+        data: ['Matcha Latte', 'Milk Tea', 'Cheese Cocoa', 'Walnut Brownie']
+      },
+      yAxis: {},
+      series: [{
+          type: 'bar',
+          name: '2015',
+          data: [89.3, 92.1, 94.4, 85.4]
+        },
+        {
+          type: 'bar',
+          name: '2016',
+          data: [95.8, 89.4, 91.2, 76.9],
+          label: {
+            show: true,
+            position: 'top',
+            // position: 'bottom',
+            // position: 'center',
+            color: "black",
+            fontSize: 12,
+            formatter: function (d) {
+              // return d.name + ' ' + d.data;
+              return d.data;
+            }
+          },
+        },
+        {
+          type: 'bar',
+          name: '2017',
+          data: [97.7, 83.1, 92.5, 78.1]
+        }
+      ]
+    };
+
+    // Display the chart using the configuration items and data just specified.
+    myChart.setOption(option);
+
+    function addData(chart) {
+      // var option = {
+      //   title: {
+      //     text: 'ECharts Title'
+      //   },
+      //   toolbox: {
+      //     show: true,
+      //     feature: {
+      //       // saveAsImage: {}
+      //       saveAsImage: {
+      //         name: "hello"
+      //       },
+      //     }
+      //   },
+      //   tooltip: {},
+      //   legend: {
+      //     data: ['sales']
+      //   },
+      //   xAxis: {
+      //     data: ['Shirts', 'Cardigans', 'Chiffons', 'Pants', 'Heels', 'Socks']
+      //   },
+      //   yAxis: {},
+      //   series: [{
+      //     name: 'sales',
+      //     type: 'bar',
+      //     data: [randomInt(), randomInt(), randomInt(), randomInt(), randomInt(), randomInt()]
+      //   }]
+      // };
+
+      option.series[0].data = [randomInt(), randomInt(), randomInt(), randomInt(), randomInt(), randomInt()]
+      option.series[1].data = [randomInt(), randomInt(), randomInt(), randomInt(), randomInt(), randomInt()]
+      option.series[2].data = [randomInt(), randomInt(), randomInt(), randomInt(), randomInt(), randomInt()]
+      chart.setOption(option)
+    }
+
+    setInterval(function () {
+      addData(myChart)
+    }, 2000)
+
+    function randomInt() {
+      return Math.floor(Math.random() * 50);
+    }
+  </script>
+</body>
+
+</html>
